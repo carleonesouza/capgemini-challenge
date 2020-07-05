@@ -1,0 +1,34 @@
+<div class="conteiner">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title class="card-header">Depositar Valor</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="container column" >
+        <mat-dialog-content [formGroup]="contaForm" (ngSubmit)="onSubmit()">
+        <div class="item item-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Número Conta</mat-label>
+            <input  matInput placeholder="Digite o ID de sua conta" type="number" formControlName="contaId" class="form-control"/>
+            <mat-error *ngIf="contaId.errors">Please, type a valid ID</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="item item-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Valor do Deposito</mat-label>
+            <input matInput placeholder="Valor para saque Conta" type="number" formControlName="valorDeposito">
+            <mat-error *ngIf="valorDeposito.errors">Please, type a valid value</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="item-buttons">
+          <button mat-button class="style-button" [disabled]="!contaForm.valid" (click)="onSubmit()">Save</button>
+            <span class="spacer"></span>
+          <button mat-button class="style-button" (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+      </mat-dialog-content>
+      </div>
+      
+    </mat-card-content>
+  </mat-card>
+
+</div>

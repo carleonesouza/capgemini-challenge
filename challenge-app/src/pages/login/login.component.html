@@ -1,0 +1,31 @@
+<div class="conteiner">
+<mat-tab-group>
+  <mat-tab label="Login">
+    <div class="conteiner">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title class="card-header">Acessar Banco</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="container column" >
+            <mat-dialog-content [formGroup]="jaTemContaForm" (ngSubmit)="onSubmit()">
+            <div class="item item-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Número do ID</mat-label>
+                <input  matInput type="number" formControlName="userId" class="form-control"/>
+                <mat-error *ngIf="userId.errors">Please, type a valid value</mat-error>
+              </mat-form-field>
+            </div>
+          </mat-dialog-content>
+          </div>
+          
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="container">
+      <button mat-raised-button color="accent" (click)="onSubmit()">Entrar</button>
+    </div>
+  </mat-tab>
+  <mat-tab label="Registrar"><app-add-conta></app-add-conta></mat-tab>
+</mat-tab-group>
+</div>
