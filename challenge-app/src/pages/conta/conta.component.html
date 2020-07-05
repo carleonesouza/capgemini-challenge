@@ -1,0 +1,75 @@
+<mat-card style="display: flex; height: 3rem;">
+  <div class="row" style="flex: 1 1;">
+    <h2>Olá Bem-Vindo ao Seu Banco {{userConta.username}}</h2>
+  </div>
+
+  <div class="row">
+    <button mat-icon-button class="edit" color="primary" matTooltip="Editar Conta" [routerLink]="['/edit-conta']">
+      <mat-icon aria-label="editar Conta">edit</mat-icon>
+    </button>
+  </div>
+</mat-card>
+<div class="conteiner" [className]=" mobileMode ? 'conteiner-mobile' : 'conteiner'">
+  <div class="row">
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon>account_balance</mat-icon>
+            <h4 mat-line><strong>{{userConta.tipo}}</strong></h4>
+            <p mat-line>Conta</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="row">
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon>account_balance_wallet</mat-icon>
+            <h4 mat-line><strong>{{userConta.limite | currency:"BRL" }} </strong></h4>
+            <p mat-line>Limite</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="row">
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon>assignment_ind</mat-icon>
+            <h4 mat-line><strong>{{userConta.id}}</strong></h4>
+            <p mat-line>ID Conta</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="row">
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon>check_circle_outline</mat-icon>
+            <h4 mat-line><strong>{{userConta.saldo | currency:"BRL" }}</strong></h4>
+            <p mat-line>Saldo</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>
+
+<div class="corner-position">
+  <button mat-fab color="primary" matTooltip="Adicionar Conta" [routerLink]="['/add-conta']">
+    <mat-icon class="animation" aria-label="Add ">add</mat-icon>
+  </button>
+</div>
