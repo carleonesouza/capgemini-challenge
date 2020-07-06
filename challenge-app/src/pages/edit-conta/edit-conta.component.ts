@@ -4,6 +4,9 @@ import { ContaService } from '../../service/conta.service';
 import { MatSnackBar } from '@angular/material';
 import { ContaModel } from '../../model/conta-model';
 import { CurrencyPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-edit-conta',
@@ -19,7 +22,7 @@ export class EditContaComponent implements OnInit {
   NUMBERPATTERN = '^[0-9.,]+$';
 
   constructor(private contaService: ContaService, private formBuilder: FormBuilder,
-     private snackBar: MatSnackBar, private currencyPipe: CurrencyPipe) { }
+     private snackBar: MatSnackBar, private currencyPipe: CurrencyPipe, private router: Router) { }
 
   ngOnInit() {
     this.contaForm = this.formBuilder.group({
@@ -32,7 +35,7 @@ export class EditContaComponent implements OnInit {
     this.contaService.getContaById(localStorage.getItem('mSessionId')).subscribe((userConta) => {
       this.conta = userConta;
       this.contaForm.setValue({
-        username: userConta.username,
+        usernameConta: userConta.username,
         numeroConta: userConta.numero,
         limiteConta: userConta.limite,
         saldoConta: this.currencyPipe.transform(userConta.saldo, 'BRL', 'symbol-narrow', '1.2-2'),
@@ -46,6 +49,11 @@ export class EditContaComponent implements OnInit {
   get numeroConta() {
     return this.contaForm.get('numeroConta');
   }
+
+  get usernameConta() {
+    return this.contaForm.get('usernameConta');
+  }
+
 
   get saldoConta() {
     return this.contaForm.get('saldoConta');
@@ -70,7 +78,13 @@ export class EditContaComponent implements OnInit {
       const tipo = this.contaForm.value.tipoConta;
       const id = this.conta.id;
       const saveConta = { username, numero, saldo, limite, tipo, id };
-      this.contaService.updateConta(saveConta);
+      this.contaService.updateConta(saveConta).subscribe((conta) => {
+        this.snackBar.open('Conta atualizada com sucesso! ', '', { duration: 4000 });
+        this.router.navigate(['/conta']);
+      }, (err: HttpErrorResponse) => {
+        this.snackBar.open('Error occurred this process', 'RETRY', { duration: 4000 });
+        console.log(err);
+      });
     }
   }
 }

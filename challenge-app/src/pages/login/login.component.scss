@@ -10,7 +10,12 @@ mat-card {
       text-align: center;
     }
   }
-  
+  .mat-tab-labels {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
   @media (max-width: 900px) {
     .conteiner {
       margin-top: 20%;

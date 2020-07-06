@@ -1,14 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { SubjectSubscriber } from 'rxjs/Subject';
+
 
 @Injectable()
 export class AuthService {
-    public uid: string = null;
+    uid: any;
+    @Output() open: EventEmitter<any> = new EventEmitter();
 
     constructor(private router: Router) { }
 
     get authenticated(): boolean {
-        return localStorage.getItem('mSessionId') !== null;
+        if (localStorage.getItem('mSessionId') !== null) {
+            this.open.emit(true);
+            return true;
+        } else {
+            this.open.emit(false);
+            this.router.navigate(['/login']);
+            return false;
+        }
     }
 
 }

@@ -31,7 +31,7 @@ export class ContaService {
       .pipe();
   }
 
-  // Get a specific Conta
+  // Get a Saldo of specific Conta
   mostraSaldo(id: string): Observable<number> {
     return this.httpClient.get<number>(`${environment.server}/contas/saldo/${id}`, this.httpOptions)
       .pipe();

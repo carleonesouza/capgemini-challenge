@@ -48,6 +48,6 @@ import { BaseComponent } from './base.component';
   ],
   providers: [ContaService, CurrencyPipe, AuthService,
     AuthGuard],
-  bootstrap: [LoginComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

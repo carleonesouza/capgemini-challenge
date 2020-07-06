@@ -18,14 +18,14 @@ export class AddContaComponent implements OnInit {
   constructor(private contaService: ContaService, private formBuilder: FormBuilder,
     private snackBar: MatSnackBar, private router: Router, private auth: AuthService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private viewContainerRef: ViewContainerRef,) { }
+    private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit() {
     this.contaForm = this.formBuilder.group({
       usernameConta: ['', [Validators.required, Validators.minLength(3)]],
       numeroConta: ['', [Validators.required, Validators.minLength(3)]],
       saldoConta: ['', [Validators.required, Validators.minLength(3)]],
-      limiteConta: ['',],
+      limiteConta: [''],
       tipoConta: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
@@ -50,7 +50,11 @@ export class AddContaComponent implements OnInit {
   }
   onNoClick() {
     this.contaForm.reset();
-    this.router.navigate(['/']);
+    if (this.auth.authenticated) {
+      this.router.navigate(['/conta']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   onSubmit() {
@@ -65,7 +69,7 @@ export class AddContaComponent implements OnInit {
         this.snackBar.open('Conta criada com sucesso! ', '', { duration: 4000 });
         localStorage.setItem('mSessionId', conta.id);
         this.auth.uid = conta.id;
-        this.router.navigate(['/']);
+        this.router.navigate(['/conta']);
         this.gotToApp();
       }, (err: HttpErrorResponse) => {
         this.snackBar.open('Error occurred this process', 'RETRY', { duration: 4000 });

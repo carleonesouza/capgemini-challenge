@@ -5,6 +5,8 @@ import { ContaService } from '../../service/conta.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { AppComponent } from '../../app/app.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public contaService: ContaService, private formBuilder: FormBuilder,
      private router: Router, private componentFactoryResolver: ComponentFactoryResolver,
-     private viewContainerRef: ViewContainerRef,
+     private viewContainerRef: ViewContainerRef, private snackBar: MatSnackBar,
      private auth: AuthService) {  }
 
   ngOnInit() {
@@ -44,9 +46,11 @@ export class LoginComponent implements OnInit {
         if (user) {
           localStorage.setItem('mSessionId', userId);
           this.auth.uid = userId;
-          this.router.navigate(['/']);
+          this.router.navigate(['/conta']);
           this.gotToApp();
         }
+      }, (err: HttpErrorResponse) => {
+        this.snackBar.open('Error occurred this process', 'RETRY', { duration: 4000 });
       });
     }
   }
