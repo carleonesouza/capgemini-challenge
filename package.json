@@ -1,0 +1,13 @@
+{
+  "name": "challenge",
+  "version": "1.0.0",
+  "description": "capgemini challenge front-end app",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carleone Souza",
+  "license": "ISC"
+}

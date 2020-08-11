@@ -1,0 +1,67 @@
+<!--  <div class="dropzone"
+ [dropzone]="config"
+ (success)="onUploadSuccess($event)"
+ (error)="onUploadError($event)"
+ (removedFile)="onRemovedFile($event)"
+ [hidden]="uploadFormForm?.length === 0">
+</div>
+<div class="dropzone d-flex align-items-center justify-content-center" *ngIf="uploadFormForm?.length === 0">
+    <div class="d-flex justify-content-center">
+        <span>Não existem uploadForm anexadas</span>
+    </div>
+</div> -->
+
+<dropzone 
+[config]="config"
+[message]="'Click or drag images here to upload'"
+(success)="onUploadSuccess($event)"
+(error)="onUploadError($event)"
+(removedFile)="onRemovedFile($event)"
+[ngClass] ="{'fa':condition}"
+[hidden]="uploadFormForm?.length === 0">
+</dropzone>
+<div class="dropzone d-flex align-items-center justify-content-center" *ngIf="uploadFormForm?.length === 0">
+    <div class="d-flex justify-content-center">
+        <span>Não existem uploadForm anexadas</span>
+    </div>
+</div>
+
+
+<div *ngIf="!condition" (click)="teste()">
+<p [ngClass] ="{'teste':!condition}">
+    texto aki
+</p>
+</div>
+
+<div *ngIf="condition" (click)="teste()">
+    <p [ngClass] ="{'teste':condition}">
+        outo texto aki
+    </p>
+</div>
+<!-- <div class="modal fade" bsModal="bsModal" #modal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-events-name">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="dialog-events-name"> Informações da fotografia</h4><button class="close" id="fecharButton" aria-label="Close" data-dismiss="modal" type="button" (click)="closeModal()"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button></div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12"><label>	Nome:</label><span class="ml-1">{{nomeArquivoAtual}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-12"><label>	Tamanho (kB):</label><span class="ml-1">{{tamanhoArquivoAtual}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-12" *ngIf="readOnly"><label>	Descrição:</label><span class="ml-1">{{descricaoForm.controls.descricao.value}}</span></div>
+                    <div class="col-12" *ngIf="!readOnly">
+                        <form [formGroup]="descricaoForm" novalidate="novalidate">
+                            <div class="form-group"><label>	Descrição:</label><textarea class="form-control" rows="3" maxlength="200" formControlName="descricao"></textarea></div>
+                        </form>
+                    </div>
+                </div>
+                <app-control-messages [control]="descricaoForm.controls.descricao"></app-control-messages>
+            </div>
+            <div class="modal-footer justify-content-between"><button class="btn btn-secondary" id="cancelarButton" type="button" (click)="closeModal()"><i class="fa fa-close mr-2"></i><span>Cancelar</span></button><button class="btn btn-primary" id="confirmarButton" type="submit" (click)="updateDescricao()"
+                    [disabled]="descricaoForm.invalid" *ngIf="!readOnly"><i class="fa fa-check mr-2"></i><span>Confirmar</span></button></div>
+        </div>
+    </div>
+</div> -->
